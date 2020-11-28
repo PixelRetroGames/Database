@@ -1,0 +1,10 @@
+./.idea
+./libs
+./ref
+./test_db
+./checkstyle.txt
+./out.txt
+./README
+./Tema-POO-2020.iml
+./src/*/.idea
+./.gitignore
