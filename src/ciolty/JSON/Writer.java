@@ -16,9 +16,9 @@ public final class Writer {
         this.file = new FileWriter(path);
     }
 
-    public void write(final ArrayList<String> array) {
+    public void write(final String string) {
         try {
-            file.write(array.toString());
+            file.write(string.toString());
         } catch (IOException e) {
             e.printStackTrace();
         }

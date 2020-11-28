@@ -1,5 +1,5 @@
 package ciolty.factory;
 
-public interface TypeFormat<T> {
-    public String getFormat(T object);
+public interface TypeFormat {
+    public String getFormat(Object object);
 }

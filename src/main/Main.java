@@ -4,9 +4,10 @@ import checker.Checkstyle;
 import checker.Checker;
 import ciolty.JSON.JsonConverter;
 import ciolty.JSON.Writer;
-import ciolty.action.ActionController;
-import ciolty.action.ActionData;
-import ciolty.action.Output;
+import ciolty.MovieImplementation.JSON.JsonOutputConverter;
+import ciolty.MovieImplementation.entities.MovieInput;
+import ciolty.MovieImplementation.server.MovieServer;
+import ciolty.server.Server;
 import common.Constants;
 import fileio.Input;
 import fileio.InputLoader;
@@ -16,7 +17,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Objects;
 
 /**
@@ -70,22 +70,20 @@ public final class Main {
         Input input = inputLoader.readData();
 
         Writer fileWriter = new Writer(outputPath);
-        ArrayList<String> arrayResult = new ArrayList<>();
 
         //TODO add here the entry point to your implementation
 
-        ActionController actionController = new ActionController();
-        ActionData actionData = new ActionData(input.getCommands().get(0));
-        Output output = actionController.Execute(actionData);
+        Server server = new MovieServer(new MovieInput(input));
+        server.runAllActions();
+        JsonConverter converter = new JsonOutputConverter();
+        String output = converter.convert(server.getOutput());
 
-        if (output == null) {
+        if (output.isEmpty()) {
             System.err.println("Output is null!");
-            arrayResult.add("");
-        } else {
-            arrayResult.add(JsonConverter.convert(output));
+            output = " ";
         }
 
-        fileWriter.write(arrayResult);
+        fileWriter.write(output);
         fileWriter.close();
     }
 }

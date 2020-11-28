@@ -1,10 +1,18 @@
 package ciolty.action;
 
+import ciolty.database.UnitOfWork;
+
 public abstract class ActionAbstract implements Action {
-    ActionData data;
+    protected UnitOfWork unitOfWork;
+    protected ActionData actionData;
 
     @Override
-    public void setData(ActionData data) {
-        this.data = data;
+    public void setUnitOfWork(UnitOfWork unitOfWork) {
+        this.unitOfWork = unitOfWork;
+    }
+
+    @Override
+    public void setActionData(ActionData actionData) {
+        this.actionData = actionData;
     }
 }

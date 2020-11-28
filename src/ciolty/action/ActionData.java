@@ -3,7 +3,6 @@ package ciolty.action;
 import fileio.ActionInputData;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class ActionData {
