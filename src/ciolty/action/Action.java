@@ -6,7 +6,22 @@ import ciolty.database.UnitOfWork;
  * Model pattern: Interacts with the database and deals with data logic
  */
 public interface Action {
-    public void setUnitOfWork(UnitOfWork unitOfWork);
-    public void setActionData(ActionData actionData);
-    public String execute();
+    /**
+     * Link action to UnitOfWork in order to be able to communicate
+     * with the Repositories.
+     * @param unitOfWork
+     */
+    void setUnitOfWork(UnitOfWork unitOfWork);
+
+    /**
+     * After creating object through factory set its data.
+     * @param actionData
+     */
+    void setActionData(ActionData actionData);
+
+    /**
+     * The function that the ActionController will call at execution
+     * @return message with the result of operation
+     */
+    String execute();
 }

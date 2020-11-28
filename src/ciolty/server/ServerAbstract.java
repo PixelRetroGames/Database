@@ -10,10 +10,4 @@ public abstract class ServerAbstract implements Server {
     protected List<Output> output;
     protected UnitOfWork unitOfWork;
     protected ActionController actionController;
-    protected Input input;
-
-    @Override
-    public void setInput(Input input) {
-        this.input = input;
-    }
 }

@@ -6,11 +6,15 @@ import java.util.function.Supplier;
 public class Factory<T> {
     private final Map<String, Supplier<T>> map;
 
-    public Factory(Map<String, Supplier<T>> map) {
+    public Factory(final Map<String, Supplier<T>> map) {
         this.map = map;
     }
 
-    public T get(String typeName) {
+    /**
+     * @param typeName
+     * @return return object of the class mapped to typeName
+     */
+    public final T get(final String typeName) {
         if (!map.containsKey(typeName)) {
             return null;
         }

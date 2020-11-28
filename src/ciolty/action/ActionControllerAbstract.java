@@ -12,8 +12,9 @@ public abstract class ActionControllerAbstract implements ActionController {
     protected final Factory<Action> actionFactory;
     protected static TypeFormat actionTypeFormat;
 
-    protected ActionControllerAbstract(UnitOfWork unitOfWork, Map<String, Supplier<Action>> actionMap,
-                                    TypeFormat actionTypeFormat) {
+    protected ActionControllerAbstract(final UnitOfWork unitOfWork,
+                                       final Map<String, Supplier<Action>> actionMap,
+                                       final TypeFormat actionTypeFormat) {
         this.unitOfWork = unitOfWork;
         actionFactory = new Factory<Action>(actionMap);
         this.actionTypeFormat = actionTypeFormat;

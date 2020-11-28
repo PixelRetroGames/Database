@@ -7,12 +7,12 @@ public abstract class ActionAbstract implements Action {
     protected ActionData actionData;
 
     @Override
-    public void setUnitOfWork(UnitOfWork unitOfWork) {
+    public final void setUnitOfWork(UnitOfWork unitOfWork) {
         this.unitOfWork = unitOfWork;
     }
 
     @Override
-    public void setActionData(ActionData actionData) {
+    public final void setActionData(ActionData actionData) {
         this.actionData = actionData;
     }
 }

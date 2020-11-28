@@ -1,5 +1,9 @@
 package ciolty.factory;
 
 public interface TypeFormat {
-    public String getFormat(Object object);
+    /**
+     * @param object
+     * @return string describing object type
+     */
+    String getFormat(Object object);
 }

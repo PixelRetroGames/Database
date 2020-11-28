@@ -4,9 +4,9 @@ import checker.Checkstyle;
 import checker.Checker;
 import ciolty.JSON.JsonConverter;
 import ciolty.JSON.Writer;
-import ciolty.MovieImplementation.JSON.JsonOutputConverter;
-import ciolty.MovieImplementation.entities.MovieInput;
-import ciolty.MovieImplementation.server.MovieServer;
+import ciolty.VideoDBImplementation.JSON.JsonOutputConverter;
+import ciolty.VideoDBImplementation.entities.VideoDBInput;
+import ciolty.VideoDBImplementation.server.VideoDBServer;
 import ciolty.server.Server;
 import common.Constants;
 import fileio.Input;
@@ -73,7 +73,7 @@ public final class Main {
 
         //TODO add here the entry point to your implementation
 
-        Server server = new MovieServer(new MovieInput(input));
+        Server server = new VideoDBServer(new VideoDBInput(input));
         server.runAllActions();
         JsonConverter converter = new JsonOutputConverter();
         String output = converter.convert(server.getOutput());

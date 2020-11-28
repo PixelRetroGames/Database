@@ -1,5 +1,9 @@
 package ciolty.database;
 
 public interface Filter {
-    public boolean isValid(Object object);
+    /**
+     * @param object
+     * @return true if object matches filter pattern
+     */
+    boolean isValid(Object object);
 }

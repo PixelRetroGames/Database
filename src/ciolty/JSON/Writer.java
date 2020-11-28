@@ -1,13 +1,7 @@
 package ciolty.JSON;
 
-import common.Constants;
-import net.sf.json.JSON;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 
 public final class Writer {
     private final FileWriter file;
@@ -16,14 +10,21 @@ public final class Writer {
         this.file = new FileWriter(path);
     }
 
-    public void write(final String string) {
+    /**
+     * Opens file from path
+     * @param path
+     */
+    public void write(final String path) {
         try {
-            file.write(string.toString());
+            file.write(path);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * Close file
+     */
     public void close() {
         try {
             file.flush();
