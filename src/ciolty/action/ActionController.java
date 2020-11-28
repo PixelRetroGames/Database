@@ -28,8 +28,7 @@ public class ActionController {
         }
 
         action.setData(data);
-        action.execute();
-        String message = action.getMessage();
+        String message = action.execute();
         return new Output(data.getActionId(), message);
     }
 }

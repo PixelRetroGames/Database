@@ -4,8 +4,8 @@ import ciolty.action.ActionAbstract;
 
 public class CommandView extends ActionAbstract {
     @Override
-    public void execute() {
+    public String execute() {
         System.out.println("Command view executed!");
-        setMessage("Command view message!");
+        return "Command view message!";
     }
 }

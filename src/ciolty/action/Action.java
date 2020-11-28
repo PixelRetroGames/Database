@@ -5,6 +5,5 @@ package ciolty.action;
  */
 public interface Action {
     public void setData(ActionData data);
-    public void execute();
-    public String getMessage();
+    public String execute();
 }
