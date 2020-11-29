@@ -3,8 +3,9 @@ package ciolty.VideoDBImplementation.repositories;
 import ciolty.VideoDBImplementation.entities.MovieData;
 import ciolty.VideoDBImplementation.entities.SeriesData;
 import ciolty.VideoDBImplementation.entities.VideoDBInput;
+import ciolty.VideoDBImplementation.resourceManagers.ResourceManagerLinkedHashMap;
 import ciolty.database.ResourceManager;
-import ciolty.database.ResourceManagerHashMap;
+import ciolty.VideoDBImplementation.resourceManagers.ResourceManagerHashMap;
 import ciolty.database.UnitOfWork;
 import ciolty.VideoDBImplementation.entities.UserData;
 import ciolty.server.Input;
@@ -26,7 +27,7 @@ public final class VideoDBUnitOfWork implements UnitOfWork {
     }
 
     private void populateMovieRepository(final VideoDBInput videoDBInput) {
-        ResourceManager<MovieData> resourceManager = new ResourceManagerHashMap<MovieData>();
+        ResourceManager<MovieData> resourceManager = new ResourceManagerLinkedHashMap<>();
         for (MovieInputData movieInputData : videoDBInput.getMovies()) {
             resourceManager.add(movieInputData.getTitle(), new MovieData(movieInputData));
         }
@@ -34,7 +35,7 @@ public final class VideoDBUnitOfWork implements UnitOfWork {
     }
 
     private void populateSeriesRepository(final VideoDBInput videoDBInput) {
-        ResourceManager<SeriesData> resourceManager = new ResourceManagerHashMap<SeriesData>();
+        ResourceManager<SeriesData> resourceManager = new ResourceManagerLinkedHashMap<>();
         for (SerialInputData seriesInputData : videoDBInput.getSerials()) {
             resourceManager.add(seriesInputData.getTitle(), new SeriesData(seriesInputData));
         }

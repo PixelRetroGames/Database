@@ -14,6 +14,11 @@ public interface Action {
     void setUnitOfWork(UnitOfWork unitOfWork);
 
     /**
+     * @return unit of work
+     */
+    UnitOfWork getUnitOfWork();
+
+    /**
      * After creating object through factory set its data.
      * @param actionData
      */

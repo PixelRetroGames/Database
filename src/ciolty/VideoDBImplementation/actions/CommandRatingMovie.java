@@ -2,6 +2,8 @@ package ciolty.VideoDBImplementation.actions;
 
 import ciolty.VideoDBImplementation.entities.MovieData;
 
+import java.util.logging.Level;
+
 public final class CommandRatingMovie extends VideoDBAction {
     private String getMovieValidity(final MovieData movieData) {
         if (movieData == null) {
@@ -13,7 +15,7 @@ public final class CommandRatingMovie extends VideoDBAction {
 
     @Override
     public String execute() {
-        System.err.println("Rated movie " + actionData.getTitle());
+        LOGGER.log(Level.INFO, "Rated movie " + actionData.getTitle());
         MovieData movieData = getUnitOfWork().getMovieRepository().get(actionData.getTitle());
         String message = getMovieValidity(movieData);
 

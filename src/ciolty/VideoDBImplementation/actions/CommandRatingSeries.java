@@ -3,6 +3,8 @@ package ciolty.VideoDBImplementation.actions;
 import ciolty.VideoDBImplementation.entities.SeasonData;
 import ciolty.VideoDBImplementation.entities.SeriesData;
 
+import java.util.logging.Level;
+
 public final class CommandRatingSeries extends VideoDBAction {
     private String getSeriesValidity(final SeriesData seriesData) {
         if (seriesData == null) {
@@ -22,7 +24,8 @@ public final class CommandRatingSeries extends VideoDBAction {
 
     @Override
     public String execute() {
-        System.err.println("Rated movie " + actionData.getTitle());
+        LOGGER.log(Level.INFO, "Rated series " + actionData.getTitle()
+                + " season " + actionData.getSeasonNumber());
         SeriesData seriesData = getUnitOfWork().getSeriesRepository().get(actionData.getTitle());
         String message = getSeriesValidity(seriesData);
 

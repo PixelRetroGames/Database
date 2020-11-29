@@ -4,12 +4,12 @@ import ciolty.VideoDBImplementation.entities.UserData;
 
 import java.util.Map;
 
-public final class CommandView extends VideoDBAction {
+public final class CommandView extends UserAction {
     @Override
     public String execute() {
         UserData userData = getUserData();
 
-        String message = getUserValidity(userData);
+        String message = checkUserValidity(userData);
         if (userData == null) {
             return message;
         }

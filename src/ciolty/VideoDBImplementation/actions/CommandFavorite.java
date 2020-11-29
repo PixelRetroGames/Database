@@ -3,14 +3,22 @@ package ciolty.VideoDBImplementation.actions;
 import ciolty.VideoDBImplementation.entities.UserData;
 
 import java.util.List;
+import java.util.logging.Level;
 
-public final class CommandFavorite extends VideoDBAction {
+public final class CommandFavorite extends UserAction {
     @Override
     public String execute() {
-        UserData userData = getUserData();
+        LOGGER.log(Level.INFO, "Added " + actionData.getTitle()
+                + " to user's " + actionData.getUsername() + " favorites");
+                UserData userData = getUserData();
 
-        String message = getUserValidity(userData);
-        if (userData == null) {
+        String message = checkUserValidity(userData);
+        if (message != null) {
+            return message;
+        }
+
+        message = checkVideoInUser(userData);
+        if (message != null) {
             return message;
         }
 
