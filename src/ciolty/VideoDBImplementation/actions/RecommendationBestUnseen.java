@@ -1,28 +1,31 @@
 package ciolty.VideoDBImplementation.actions;
 
 import ciolty.VideoDBImplementation.entities.MovieData;
-import ciolty.VideoDBImplementation.entities.UserData;
 
 import java.util.Comparator;
 import java.util.List;
 
-public final class RecommendationBestUnseen extends VideoAction {
+public final class RecommendationBestUnseen extends RecommendationAction {
+    private List<MovieData> unwatchedMovies;
+
+    @Override
+    public void initLocalData() {
+        super.initLocalData();
+        unwatchedMovies = getUnwatchedMovies(userData);
+    }
+
     @Override
     public String execute() {
-        UserData userData = getUserData();
-        String message = checkUserValidity(userData);
-        if (message != null) {
-            return "Best_unseenRecommendation cannot be applied!";
-        }
-
-        List<MovieData> unwatchedMovies = getUnwatchedMovies(userData);
         unwatchedMovies.sort(Comparator.comparingDouble(MovieData::getRating).reversed());
+        String successMesage = "BestRatedUnseenRecommendation result: "
+                + unwatchedMovies.get(0).getTitle();
+        return successMesage;
+    }
 
-        if (unwatchedMovies.isEmpty()) {
-            return "Best_unseenRecommendation cannot be applied!";
-        }
-
-        message = "BestRatedUnseenRecommendation result: " + unwatchedMovies.get(0).getTitle();
-        return message;
+    @Override
+    public String checkData() {
+        failMessage = "Best_unseenRecommendation cannot be applied!";
+        checkList.add(!unwatchedMovies.isEmpty() ? null : "notNull");
+        return super.checkData();
     }
 }

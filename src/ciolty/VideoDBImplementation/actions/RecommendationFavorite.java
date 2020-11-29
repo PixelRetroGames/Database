@@ -1,28 +1,24 @@
 package ciolty.VideoDBImplementation.actions;
 
-import ciolty.VideoDBImplementation.entities.MovieData;
 import ciolty.VideoDBImplementation.entities.UserData;
-import ciolty.database.Filter;
 
 import java.util.List;
-import java.util.logging.Level;
 
-public final class RecommendationFavorite extends UserAction {
+public final class RecommendationFavorite extends RecommendationAction {
     @Override
     public String execute() {
-        UserData userData = getUserData();
-        String message = checkUserValidity(userData);
-        if (userData == null || !userData.getSubscriptionType().equals("PREMIUM")) {
-            return "FavoriteRecommendation cannot be applied!";
-        }
-
         String favorite = getFavoriteVideo(userData);
-
         if (favorite == null) {
-            return "FavoriteRecommendation cannot be applied!";
+            return failMessage;
         }
-
         return "FavoriteRecommendation result: " + favorite;
+    }
+
+    @Override
+    public String checkData() {
+        failMessage = "FavoriteRecommendation cannot be applied!";
+        checkList.add(userData.getSubscriptionType().equals("PREMIUM") ? null : "notNull");
+        return super.checkData();
     }
 
     private String getFavoriteVideo(final UserData userData) {

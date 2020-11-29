@@ -6,7 +6,9 @@ import ciolty.VideoDBImplementation.entities.SeriesData;
 import java.util.logging.Level;
 
 public final class CommandRatingSeries extends VideoDBAction {
-    private String getSeriesValidity(final SeriesData seriesData) {
+    private SeriesData seriesData;
+
+    private String getSeriesValidity() {
         if (seriesData == null) {
             return "Error: series " + seriesData.getTitle() + " not found";
         } else {
@@ -23,16 +25,15 @@ public final class CommandRatingSeries extends VideoDBAction {
     }
 
     @Override
+    public void initLocalData() {
+        seriesData = getUnitOfWork().getSeriesRepository().get(actionData.getTitle());
+    }
+
+    @Override
     public String execute() {
         LOGGER.log(Level.INFO, "Rated series " + actionData.getTitle()
                 + " season " + actionData.getSeasonNumber());
-        SeriesData seriesData = getUnitOfWork().getSeriesRepository().get(actionData.getTitle());
-        String message = getSeriesValidity(seriesData);
-
-        if (seriesData == null) {
-            return message;
-        }
-
+        String message;
         if (actionData.getSeasonNumber() >= seriesData.getNumberOfSeasons()) {
             message = "error: season " + actionData.getSeasonNumber()
                     + " does not exist in " + actionData.getTitle() + "!";
@@ -71,5 +72,14 @@ public final class CommandRatingSeries extends VideoDBAction {
         message = "success -> " + seriesData.getTitle() + " was rated with "
                 + rating + " by " + actionData.getUsername();
         return message;
+    }
+
+    @Override
+    public String checkData() {
+        String message = getSeriesValidity();
+        if (message != null) {
+            return message;
+        }
+        return null;
     }
 }

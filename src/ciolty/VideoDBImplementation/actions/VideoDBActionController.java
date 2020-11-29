@@ -34,9 +34,9 @@ public class VideoDBActionController extends ActionControllerAbstract {
             return null;
         }
 
-        action.setActionData(data);
         action.setUnitOfWork(unitOfWork);
-        String message = action.execute();
+        action.setActionData(data);
+        String message = action.run();
         return message;
     }
 }

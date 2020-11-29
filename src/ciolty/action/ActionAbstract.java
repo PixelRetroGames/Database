@@ -14,5 +14,15 @@ public abstract class ActionAbstract implements Action {
     @Override
     public final void setActionData(ActionData actionData) {
         this.actionData = actionData;
+        initLocalData();
+    }
+
+    @Override
+    public final String run() {
+        String message = checkData();
+        if (message == null) {
+            return execute();
+        }
+        return message;
     }
 }

@@ -1,6 +1,5 @@
 package ciolty.VideoDBImplementation.actions;
 
-import ciolty.VideoDBImplementation.entities.UserData;
 import ciolty.action.Action;
 
 public final class CommandRating extends UserAction {
@@ -9,18 +8,12 @@ public final class CommandRating extends UserAction {
     }
 
     @Override
+    public void initLocalData() {
+        super.initLocalData();
+    }
+
+    @Override
     public String execute() {
-        UserData userData = getUserData();
-        String message = checkUserValidity(userData);
-        if (message != null) {
-            return message;
-        }
-
-        message = checkVideoInUserHistory(userData);
-        if (message != null) {
-            return message;
-        }
-
         Action specializedAction;
 
         if (isMovie()) {
@@ -33,5 +26,19 @@ public final class CommandRating extends UserAction {
         specializedAction.setActionData(actionData);
 
         return specializedAction.execute();
+    }
+
+    @Override
+    public String checkData() {
+        String message = super.checkData();
+        if (message != null) {
+            return message;
+        }
+
+        message = checkVideoInUserHistory();
+        if (message != null) {
+            return message;
+        }
+        return null;
     }
 }

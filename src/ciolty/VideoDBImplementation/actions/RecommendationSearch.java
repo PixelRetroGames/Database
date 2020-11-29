@@ -2,21 +2,14 @@ package ciolty.VideoDBImplementation.actions;
 
 import ciolty.VideoDBImplementation.entities.MovieData;
 import ciolty.VideoDBImplementation.entities.SeriesData;
-import ciolty.VideoDBImplementation.entities.UserData;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public final class RecommendationSearch extends VideoAction {
+public final class RecommendationSearch extends RecommendationAction {
     @Override
     public String execute() {
-        UserData userData = getUserData();
-        String message = checkUserValidity(userData);
-        if (message != null || !userData.getSubscriptionType().equals("PREMIUM")) {
-            return "SearchRecommendation cannot be applied!";
-        }
-
         List<MovieData> unwatchedMovies = getUnwatchedMoviesOfGenre(userData,
                 actionData.getGenre());
         List<SeriesData> unwatchedSeries = getUnwatchedSeriesOfGenre(userData,
@@ -30,11 +23,19 @@ public final class RecommendationSearch extends VideoAction {
         Collections.sort(videosNames);
 
         if (videosNames.isEmpty()) {
-            return "SearchRecommendation cannot be applied!";
+            return failMessage;
         }
 
-        message = "SearchRecommendation result: " + videosNames.toString();
+        String successMessage = "SearchRecommendation result: "
+                                + videosNames.toString();
 
-        return message;
+        return successMessage;
+    }
+
+    @Override
+    public String checkData() {
+        failMessage = "SearchRecommendation cannot be applied!";
+        checkList.add(userData.getSubscriptionType().equals("PREMIUM") ? null : "notNull");
+        return super.checkData();
     }
 }

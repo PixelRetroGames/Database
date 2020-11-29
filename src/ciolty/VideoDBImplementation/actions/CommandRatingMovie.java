@@ -5,7 +5,7 @@ import ciolty.VideoDBImplementation.entities.MovieData;
 import java.util.logging.Level;
 
 public final class CommandRatingMovie extends VideoDBAction {
-    private String getMovieValidity(final MovieData movieData) {
+    private String getMovieValidity() {
         if (movieData == null) {
             return "Error: movie " + movieData.getTitle() + " not found";
         } else {
@@ -13,16 +13,16 @@ public final class CommandRatingMovie extends VideoDBAction {
         }
     }
 
+    private MovieData movieData;
+
+    @Override
+    public void initLocalData() {
+        movieData = getUnitOfWork().getMovieRepository().get(actionData.getTitle());
+    }
+
     @Override
     public String execute() {
         LOGGER.log(Level.INFO, "Rated movie " + actionData.getTitle());
-        MovieData movieData = getUnitOfWork().getMovieRepository().get(actionData.getTitle());
-        String message = getMovieValidity(movieData);
-
-        if (movieData == null) {
-            return message;
-        }
-
         double givenRating = actionData.getGrade();
         double rating = movieData.getRating();
         int numberOfRatings = movieData.getNumberOfRatings();
@@ -38,8 +38,18 @@ public final class CommandRatingMovie extends VideoDBAction {
         movieData.setNumberOfRatings(numberOfRatings);
         movieData.setRating(rating);
 
-        message = "success -> " + movieData.getTitle() + " was rated with "
-                  + rating + " by " + actionData.getUsername();
-        return message;
+        String successMessage = "success -> " + movieData.getTitle()
+                                + " was rated with " + rating + " by "
+                                + actionData.getUsername();
+        return successMessage;
+    }
+
+    @Override
+    public String checkData() {
+        String message = getMovieValidity();
+        if (message != null) {
+            return message;
+        }
+        return null;
     }
 }

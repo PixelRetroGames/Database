@@ -9,11 +9,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class UserRepository extends RepositoryAbstract<UserData> {
+public final class UserRepository extends RepositoryAbstract<UserData> {
     public UserRepository(final ResourceManager<UserData> resourceManager) {
         super(resourceManager);
     }
 
+    /**
+     * @return List with favorite videos of all users
+     */
     public List<String> getAllFavorites() {
         ArrayList<String> allFavorites = new ArrayList<>();
         for (UserData userData : resourceManager.getAll()) {
@@ -22,6 +25,9 @@ public class UserRepository extends RepositoryAbstract<UserData> {
         return allFavorites;
     }
 
+    /**
+     * @return Map with the global history (history of all users combined)
+     */
     public Map<String, Integer> getAllHistory() {
         Map<String, Integer> allHistory = new HashMap<>();
         for (UserData userData : resourceManager.getAll()) {

@@ -1,16 +1,6 @@
 Starting audit...
 [ERROR] E:\JAVA\POO-Tema1\.\src\ciolty\action\ActionAbstract.java:10:37: Parameter unitOfWork should be final. [FinalParameters]
 [ERROR] E:\JAVA\POO-Tema1\.\src\ciolty\action\ActionAbstract.java:15:37: Parameter actionData should be final. [FinalParameters]
-[ERROR] E:\JAVA\POO-Tema1\.\src\ciolty\VideoDBImplementation\actions\RecommendationFavorite.java:3:8: Unused import - ciolty.VideoDBImplementation.entities.MovieData. [UnusedImports]
-[ERROR] E:\JAVA\POO-Tema1\.\src\ciolty\VideoDBImplementation\actions\RecommendationFavorite.java:5:8: Unused import - ciolty.database.Filter. [UnusedImports]
-[ERROR] E:\JAVA\POO-Tema1\.\src\ciolty\VideoDBImplementation\actions\RecommendationFavorite.java:8:8: Unused import - java.util.logging.Level. [UnusedImports]
-[ERROR] E:\JAVA\POO-Tema1\.\src\ciolty\VideoDBImplementation\actions\RecommendationPopular.java:7:8: Unused import - java.security.KeyPair. [UnusedImports]
-[ERROR] E:\JAVA\POO-Tema1\.\src\ciolty\VideoDBImplementation\actions\RecommendationPopular.java:8:17: Using the '.*' form of import should be avoided - java.util.*. [AvoidStarImport]
-[ERROR] E:\JAVA\POO-Tema1\.\src\ciolty\VideoDBImplementation\actions\RecommendationPopular.java:63:36: Parameter title should be final. [FinalParameters]
-[ERROR] E:\JAVA\POO-Tema1\.\src\ciolty\VideoDBImplementation\repositories\UserRepository.java:17:5: Class 'UserRepository' looks like designed for extension (can be subclassed), but the method 'getAllFavorites' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'UserRepository' final or making the method 'getAllFavorites' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
-[ERROR] E:\JAVA\POO-Tema1\.\src\ciolty\VideoDBImplementation\repositories\UserRepository.java:17:5: Missing a Javadoc comment. [MissingJavadocMethod]
-[ERROR] E:\JAVA\POO-Tema1\.\src\ciolty\VideoDBImplementation\repositories\UserRepository.java:25:5: Class 'UserRepository' looks like designed for extension (can be subclassed), but the method 'getAllHistory' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'UserRepository' final or making the method 'getAllHistory' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
-[ERROR] E:\JAVA\POO-Tema1\.\src\ciolty\VideoDBImplementation\repositories\UserRepository.java:25:5: Missing a Javadoc comment. [MissingJavadocMethod]
 [ERROR] E:\JAVA\POO-Tema1\.\src\ciolty\VideoDBImplementation\server\VideoDBServer.java:3:44: Using the '.*' form of import should be avoided - ciolty.VideoDBImplementation.actions.*. [AvoidStarImport]
 Audit done.
-Checkstyle ends with 13 errors.
+Checkstyle ends with 3 errors.

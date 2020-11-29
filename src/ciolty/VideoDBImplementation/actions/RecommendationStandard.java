@@ -1,21 +1,20 @@
 package ciolty.VideoDBImplementation.actions;
 
-import ciolty.VideoDBImplementation.entities.UserData;
-
-public final class RecommendationStandard extends VideoAction {
+public final class RecommendationStandard extends RecommendationAction {
     @Override
     public String execute() {
-        UserData userData = getUserData();
-        String message = checkUserValidity(userData);
-        if (userData == null) {
-            return "StandardRecommendation cannot be applied!";
-        }
-
         String unwatchedMovies = getFirstUnwatchedVideo(userData);
         if (unwatchedMovies == null) {
-            return "StandardRecommendation cannot be applied!";
+            return failMessage;
         }
-        message = "StandardRecommendation result: " + unwatchedMovies;
-        return message;
+        String successMessage = "StandardRecommendation result: "
+                                + unwatchedMovies;
+        return successMessage;
+    }
+
+    @Override
+    public String checkData() {
+        failMessage = "StandardRecommendation cannot be applied!";
+        return super.checkData();
     }
 }

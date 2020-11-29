@@ -10,6 +10,7 @@ import java.util.List;
 public abstract class VideoAction
         extends UserAction
         implements MovieAction, SeriesAction {
+
     protected final String getFirstUnwatchedVideo(final UserData userData) {
         String firstUnwatchedMovie = getFirstUnwatchedMovie(userData);
         String firstUnwatchedSeries = getFirstUnwatchedSeries(userData);

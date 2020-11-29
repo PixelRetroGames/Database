@@ -2,39 +2,42 @@ package ciolty.VideoDBImplementation.actions;
 
 import ciolty.VideoDBImplementation.entities.MovieData;
 import ciolty.VideoDBImplementation.entities.SeriesData;
-import ciolty.VideoDBImplementation.entities.UserData;
 
-import java.security.KeyPair;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Collections;
 
-public final class RecommendationPopular extends VideoAction {
+public final class RecommendationPopular extends RecommendationAction {
     @Override
     public String execute() {
-        UserData userData = getUserData();
-        String message = checkUserValidity(userData);
-        if (message != null || !userData.getSubscriptionType().equals("PREMIUM")) {
-            return "PopularRecommendation cannot be applied!";
-        }
-
         List<Map.Entry<String, Integer>> sortedGenres = getGenresSortedByPopularity();
         boolean found = false;
         int pos = 0;
 
-        message = "PopularRecommendation result: ";
+        String successMessage = "PopularRecommendation result: ";
         while (!found && pos < sortedGenres.size()) {
             String genre = sortedGenres.get(pos++).getKey();
             List<String> videos = getUnwatchedVideosOfGenre(userData, genre);
             if (!videos.isEmpty()) {
-                message += videos.get(0);
+                successMessage += videos.get(0);
                 found = true;
             }
         }
 
         if (!found) {
-            return "PopularRecommendation cannot be applied!";
+            return failMessage;
         }
 
-        return message;
+        return successMessage;
+    }
+
+    @Override
+    public String checkData() {
+        failMessage = "PopularRecommendation cannot be applied!";
+        checkList.add(userData.getSubscriptionType().equals("PREMIUM") ? null : "notNull");
+        return super.checkData();
     }
 
     private List<Map.Entry<String, Integer>> getGenresSortedByPopularity() {
@@ -60,7 +63,7 @@ public final class RecommendationPopular extends VideoAction {
         return sortedGenres;
     }
 
-    private List<String> getGenres(String title) {
+    private List<String> getGenres(final String title) {
         MovieData movie = getUnitOfWork().getMovieRepository().get(title);
         SeriesData series = getUnitOfWork().getSeriesRepository().get(title);
 
