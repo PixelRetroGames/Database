@@ -13,8 +13,10 @@ public final class MovieData extends VideoData {
         this.duration = inputData.getDuration();
         rating = 0.0f;
         numberOfRatings = 0;
+        priority = 1;
     }
 
+    @Override
     public int getDuration() {
         return duration;
     }

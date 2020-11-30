@@ -9,7 +9,6 @@ public abstract class RecommendationNonPremium extends Recommendation {
 
     @Override
     public final String start() {
-        System.err.println("Start called");
         String message = super.start();
         if (message != null) {
             return failMessage;

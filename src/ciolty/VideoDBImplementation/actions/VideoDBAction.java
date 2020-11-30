@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 
 public abstract class VideoDBAction extends ActionAbstract implements VideoDBActionInterface {
     protected static final Logger LOGGER = Logger.getLogger("VideoDBAction");
-    private static final Level LOGGER_LEVEL = Level.WARNING;
+    private static final Level LOGGER_LEVEL = Level.OFF;
 
     protected VideoDBAction() {
         super();

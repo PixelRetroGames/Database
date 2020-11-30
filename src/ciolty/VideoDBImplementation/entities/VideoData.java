@@ -9,12 +9,23 @@ public abstract class VideoData {
     private final int year;
     private final ArrayList<String> cast;
     private final ArrayList<String> genres;
+    protected int priority;
 
     /**
      * Should be implemented by Movie and Series
      * @return rating of video
      */
     public abstract double getRating();
+
+    /**
+     * Should be implemented by Movie and Series
+     * @return duration of video
+     */
+    public abstract int getDuration();
+
+    public int getPriority() {
+        return priority;
+    }
 
     public VideoData(final ShowInput inputData) {
         this.title = inputData.getTitle();

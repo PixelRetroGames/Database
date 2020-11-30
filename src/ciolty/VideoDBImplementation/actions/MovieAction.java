@@ -8,6 +8,15 @@ import java.util.List;
 
 public interface MovieAction extends VideoDBActionInterface {
     /**
+     * @param filter
+     * @return List of movies with filter
+     */
+    default List<MovieData> getAllMoviesWithFilter(Filter filter) {
+        List<MovieData> movies = getUnitOfWork().getMovieRepository().find(filter);
+        return movies;
+    }
+
+    /**
      * @param userData
      * @return List of all the movies that haven't been watched by user
      */

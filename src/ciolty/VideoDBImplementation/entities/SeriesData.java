@@ -17,6 +17,8 @@ public final class SeriesData extends VideoData {
         for (int i = 0; i < numberOfSeasons; i++) {
             seasons.add(new SeasonData(inputData.getSeasons().get(i)));
         }
+
+        this.priority = 2;
     }
 
     public int getNumberOfSeasons() {
@@ -35,6 +37,15 @@ public final class SeriesData extends VideoData {
         }
         seriesRating /= numberOfSeasons;
         return seriesRating;
+    }
+
+    @Override
+    public int getDuration() {
+        int duration = 0;
+        for (SeasonData seasonDataIterator : seasons) {
+            duration += seasonDataIterator.getDuration();
+        }
+        return duration;
     }
 
     @Override

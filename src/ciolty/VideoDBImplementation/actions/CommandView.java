@@ -15,8 +15,7 @@ public final class CommandView extends UserAction {
 
         timesViewed++;
         history.put(movieTitle, timesViewed);
-        String successMessage = "success -> " + movieTitle + " was viewed with total views of "
-                                + timesViewed;
-        return successMessage;
+
+        return "success -> " + movieTitle + " was viewed with total views of " + timesViewed;
     }
 }

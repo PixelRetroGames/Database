@@ -4,11 +4,16 @@ import ciolty.VideoDBImplementation.entities.MovieData;
 
 import java.util.logging.Level;
 
-public final class CommandRatingMovie extends VideoDBAction {
+public final class CommandRatingMovie extends UserAction {
     private MovieData movieData;
 
     @Override
     public String start() {
+        String message = super.start();
+        if (message != null) {
+            return message;
+        }
+
         movieData = getUnitOfWork().getMovieRepository().get(actionData.getTitle());
         if (movieData == null) {
             return "Error: movie " + movieData.getTitle() + " not found";
@@ -18,7 +23,11 @@ public final class CommandRatingMovie extends VideoDBAction {
 
     @Override
     public String execute() {
-        LOGGER.log(Level.INFO, "Rated movie " + actionData.getTitle());
+        if (userData.getRatedVideos().contains(movieData.getTitle())) {
+            return "error -> " + movieData.getTitle() + " has been already rated";
+        }
+
+        LOGGER.log(Level.INFO, "Rated movie " + actionData.getTitle() + " rating = " + actionData.getGrade());
         double givenRating = actionData.getGrade();
         double rating = movieData.getRating();
         int numberOfRatings = movieData.getNumberOfRatings();
@@ -34,9 +43,9 @@ public final class CommandRatingMovie extends VideoDBAction {
         movieData.setNumberOfRatings(numberOfRatings);
         movieData.setRating(rating);
 
-        String successMessage = "success -> " + movieData.getTitle()
-                                + " was rated with " + rating + " by "
-                                + actionData.getUsername();
-        return successMessage;
+        userData.getRatedVideos().add(movieData.getTitle());
+
+        return "success -> " + movieData.getTitle() + " was rated with " + givenRating + " by "
+                + actionData.getUsername();
     }
 }

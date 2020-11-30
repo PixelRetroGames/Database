@@ -1,14 +1,6 @@
 package ciolty.VideoDBImplementation.server;
 
-import ciolty.VideoDBImplementation.actions.CommandFavorite;
-import ciolty.VideoDBImplementation.actions.CommandRating;
-import ciolty.VideoDBImplementation.actions.CommandView;
-import ciolty.VideoDBImplementation.actions.RecommendationBestUnseen;
-import ciolty.VideoDBImplementation.actions.RecommendationFavorite;
-import ciolty.VideoDBImplementation.actions.RecommendationPopular;
-import ciolty.VideoDBImplementation.actions.RecommendationSearch;
-import ciolty.VideoDBImplementation.actions.RecommendationStandard;
-import ciolty.VideoDBImplementation.actions.VideoDBActionController;
+import ciolty.VideoDBImplementation.actions.*;
 import ciolty.VideoDBImplementation.entities.VideoDBOutput;
 import ciolty.action.ActionData;
 import ciolty.VideoDBImplementation.entities.VideoDBInput;
@@ -28,15 +20,19 @@ public final class VideoDBServer extends ServerAbstract {
         unitOfWork = new VideoDBUnitOfWork();
         unitOfWork.populate(input);
 
-        actionController = new VideoDBActionController(unitOfWork, Map.of(
-            "command-view",                 CommandView::new,
-            "command-favorite",             CommandFavorite::new,
-            "command-rating",               CommandRating::new,
-            "recommendation-standard",      RecommendationStandard::new,
-            "recommendation-favorite",      RecommendationFavorite::new,
-            "recommendation-search",        RecommendationSearch::new,
-            "recommendation-best_unseen",   RecommendationBestUnseen::new,
-            "recommendation-popular",       RecommendationPopular::new));
+        actionController = new VideoDBActionController(unitOfWork, Map.ofEntries(
+            Map.entry("command-view",                 CommandView::new),
+            Map.entry("command-favorite",             CommandFavorite::new),
+            Map.entry("command-rating",               CommandRating::new),
+            Map.entry("recommendation-standard",      RecommendationStandard::new),
+            Map.entry("recommendation-favorite",      RecommendationFavorite::new),
+            Map.entry("recommendation-search",        RecommendationSearch::new),
+            Map.entry("recommendation-best_unseen",   RecommendationBestUnseen::new),
+            Map.entry("recommendation-popular",       RecommendationPopular::new),
+            Map.entry("query-users",                  QueryUsers::new),
+            Map.entry("query-movies",                 QueryMovies::new),
+            Map.entry("query-shows",                  QuerySeries::new),
+            Map.entry("query-actors",                 QueryActors::new)));
     }
 
     @Override

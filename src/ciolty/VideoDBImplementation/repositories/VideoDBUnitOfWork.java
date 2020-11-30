@@ -75,6 +75,10 @@ public final class VideoDBUnitOfWork implements UnitOfWork {
         return seriesRepository;
     }
 
+    public ActorRepository getActorRepository() {
+        return actorRepository;
+    }
+
     @Override
     public void terminate() { }
 }

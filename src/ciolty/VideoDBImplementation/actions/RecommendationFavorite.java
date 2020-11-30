@@ -3,6 +3,7 @@ package ciolty.VideoDBImplementation.actions;
 import ciolty.VideoDBImplementation.entities.UserData;
 
 import java.util.List;
+import java.util.Map;
 
 public final class RecommendationFavorite extends RecommendationPremium {
     public RecommendationFavorite() {
@@ -20,12 +21,17 @@ public final class RecommendationFavorite extends RecommendationPremium {
     }
 
     private String getFavoriteVideo(final UserData userData) {
-        List<String> favoriteVideos = getUnitOfWork().getUserRepository().getAllFavorites();
-        for (String video : favoriteVideos) {
-            if (!userData.getHistory().containsKey(video)) {
-                return video;
+        Map<String, Integer> favoriteVideos = getUnitOfWork().getUserRepository().getAllFavorites();
+        String favoriteVideo = null;
+        int maxOccurences = 0;
+        for (Map.Entry<String, Integer> entry : favoriteVideos.entrySet()) {
+            if (!userData.getHistory().containsKey(entry.getKey())) {
+                if (entry.getValue() > maxOccurences) {
+                    maxOccurences = entry.getValue();
+                    favoriteVideo = entry.getKey();
+                }
             }
         }
-        return null;
+        return favoriteVideo;
     }
 }
