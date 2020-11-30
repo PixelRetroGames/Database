@@ -4,7 +4,12 @@ import ciolty.VideoDBImplementation.entities.UserData;
 
 import java.util.List;
 
-public final class RecommendationFavorite extends RecommendationAction {
+public final class RecommendationFavorite extends RecommendationPremium {
+    public RecommendationFavorite() {
+        super();
+        setFailMessage("FavoriteRecommendation cannot be applied!");
+    }
+
     @Override
     public String execute() {
         String favorite = getFavoriteVideo(userData);
@@ -12,13 +17,6 @@ public final class RecommendationFavorite extends RecommendationAction {
             return failMessage;
         }
         return "FavoriteRecommendation result: " + favorite;
-    }
-
-    @Override
-    public String checkData() {
-        failMessage = "FavoriteRecommendation cannot be applied!";
-        checkList.add(userData.getSubscriptionType().equals("PREMIUM") ? null : "notNull");
-        return super.checkData();
     }
 
     private String getFavoriteVideo(final UserData userData) {

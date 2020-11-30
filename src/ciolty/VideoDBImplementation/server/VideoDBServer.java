@@ -1,6 +1,14 @@
 package ciolty.VideoDBImplementation.server;
 
-import ciolty.VideoDBImplementation.actions.*;
+import ciolty.VideoDBImplementation.actions.CommandFavorite;
+import ciolty.VideoDBImplementation.actions.CommandRating;
+import ciolty.VideoDBImplementation.actions.CommandView;
+import ciolty.VideoDBImplementation.actions.RecommendationBestUnseen;
+import ciolty.VideoDBImplementation.actions.RecommendationFavorite;
+import ciolty.VideoDBImplementation.actions.RecommendationPopular;
+import ciolty.VideoDBImplementation.actions.RecommendationSearch;
+import ciolty.VideoDBImplementation.actions.RecommendationStandard;
+import ciolty.VideoDBImplementation.actions.VideoDBActionController;
 import ciolty.VideoDBImplementation.entities.VideoDBOutput;
 import ciolty.action.ActionData;
 import ciolty.VideoDBImplementation.entities.VideoDBInput;

@@ -5,7 +5,7 @@ import fileio.ShowInput;
 
 import java.util.ArrayList;
 
-public final class SeriesData extends ShowData {
+public final class SeriesData extends VideoData {
     private final int numberOfSeasons;
     private final ArrayList<SeasonData> seasons;
 
@@ -25,6 +25,16 @@ public final class SeriesData extends ShowData {
 
     public ArrayList<SeasonData> getSeasons() {
         return seasons;
+    }
+
+    @Override
+    public double getRating() {
+        double seriesRating = 0.0f;
+        for (SeasonData seasonDataIterator : seasons) {
+            seriesRating += seasonDataIterator.getRating();
+        }
+        seriesRating /= numberOfSeasons;
+        return seriesRating;
     }
 
     @Override

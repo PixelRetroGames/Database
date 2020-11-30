@@ -5,19 +5,15 @@ import ciolty.VideoDBImplementation.entities.MovieData;
 import java.util.logging.Level;
 
 public final class CommandRatingMovie extends VideoDBAction {
-    private String getMovieValidity() {
-        if (movieData == null) {
-            return "Error: movie " + movieData.getTitle() + " not found";
-        } else {
-            return null;
-        }
-    }
-
     private MovieData movieData;
 
     @Override
-    public void initLocalData() {
+    public String start() {
         movieData = getUnitOfWork().getMovieRepository().get(actionData.getTitle());
+        if (movieData == null) {
+            return "Error: movie " + movieData.getTitle() + " not found";
+        }
+        return null;
     }
 
     @Override
@@ -42,14 +38,5 @@ public final class CommandRatingMovie extends VideoDBAction {
                                 + " was rated with " + rating + " by "
                                 + actionData.getUsername();
         return successMessage;
-    }
-
-    @Override
-    public String checkData() {
-        String message = getMovieValidity();
-        if (message != null) {
-            return message;
-        }
-        return null;
     }
 }

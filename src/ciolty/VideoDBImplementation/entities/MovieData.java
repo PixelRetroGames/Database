@@ -3,7 +3,7 @@ package ciolty.VideoDBImplementation.entities;
 import fileio.MovieInputData;
 import fileio.ShowInput;
 
-public final class MovieData extends ShowData {
+public final class MovieData extends VideoData {
     private final int duration;
     private double rating;
     private int numberOfRatings;
@@ -19,6 +19,7 @@ public final class MovieData extends ShowData {
         return duration;
     }
 
+    @Override
     public double getRating() {
         return rating;
     }

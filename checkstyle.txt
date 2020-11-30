@@ -1,6 +1,7 @@
 Starting audit...
 [ERROR] E:\JAVA\POO-Tema1\.\src\ciolty\action\ActionAbstract.java:10:37: Parameter unitOfWork should be final. [FinalParameters]
 [ERROR] E:\JAVA\POO-Tema1\.\src\ciolty\action\ActionAbstract.java:15:37: Parameter actionData should be final. [FinalParameters]
-[ERROR] E:\JAVA\POO-Tema1\.\src\ciolty\VideoDBImplementation\server\VideoDBServer.java:3:44: Using the '.*' form of import should be avoided - ciolty.VideoDBImplementation.actions.*. [AvoidStarImport]
+[ERROR] E:\JAVA\POO-Tema1\.\src\ciolty\VideoDBImplementation\actions\QueryUsers.java:4:5: Class 'QueryUsers' looks like designed for extension (can be subclassed), but the method 'execute' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'QueryUsers' final or making the method 'execute' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
+[ERROR] E:\JAVA\POO-Tema1\.\src\ciolty\VideoDBImplementation\actions\Recommendation.java:6:38: Parameter failMessage should be final. [FinalParameters]
 Audit done.
-Checkstyle ends with 3 errors.
+Checkstyle ends with 4 errors.

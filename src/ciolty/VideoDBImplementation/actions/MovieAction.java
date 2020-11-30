@@ -9,21 +9,6 @@ import java.util.List;
 public interface MovieAction extends VideoDBActionInterface {
     /**
      * @param userData
-     * @return first movie that haven't been watched by user
-     */
-    default String getFirstUnwatchedMovie(final UserData userData) {
-        List<MovieData> unwatchedMovies = getUnwatchedMovies(userData);
-
-        if (unwatchedMovies.isEmpty()) {
-            return null;
-        }
-
-        MovieData firstUnwatchedMovie = unwatchedMovies.get(0);
-        return firstUnwatchedMovie.getTitle();
-    }
-
-    /**
-     * @param userData
      * @return List of all the movies that haven't been watched by user
      */
     default List<MovieData> getUnwatchedMovies(final UserData userData) {

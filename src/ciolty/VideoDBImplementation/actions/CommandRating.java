@@ -1,6 +1,6 @@
 package ciolty.VideoDBImplementation.actions;
 
-import ciolty.action.Action;
+import ciolty.action.Actionable;
 
 public final class CommandRating extends UserAction {
     private boolean isMovie() {
@@ -8,13 +8,20 @@ public final class CommandRating extends UserAction {
     }
 
     @Override
-    public void initLocalData() {
-        super.initLocalData();
+    public String start() {
+        String message = super.start();
+        if (message != null) {
+            return message;
+        }
+        if (!isVideoInUserHistory()) {
+            return "error -> " + actionData.getTitle() + " is not seen";
+        }
+        return null;
     }
 
     @Override
     public String execute() {
-        Action specializedAction;
+        Actionable specializedAction;
 
         if (isMovie()) {
             specializedAction = new CommandRatingMovie();
@@ -25,20 +32,6 @@ public final class CommandRating extends UserAction {
         specializedAction.setUnitOfWork(unitOfWork);
         specializedAction.setActionData(actionData);
 
-        return specializedAction.execute();
-    }
-
-    @Override
-    public String checkData() {
-        String message = super.checkData();
-        if (message != null) {
-            return message;
-        }
-
-        message = checkVideoInUserHistory();
-        if (message != null) {
-            return message;
-        }
-        return null;
+        return specializedAction.run();
     }
 }

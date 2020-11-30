@@ -1,14 +1,16 @@
 package ciolty.VideoDBImplementation.repositories;
 
+import ciolty.VideoDBImplementation.entities.ActorData;
 import ciolty.VideoDBImplementation.entities.MovieData;
 import ciolty.VideoDBImplementation.entities.SeriesData;
+import ciolty.VideoDBImplementation.entities.UserData;
 import ciolty.VideoDBImplementation.entities.VideoDBInput;
 import ciolty.VideoDBImplementation.resourceManagers.ResourceManagerLinkedHashMap;
 import ciolty.database.ResourceManager;
 import ciolty.VideoDBImplementation.resourceManagers.ResourceManagerHashMap;
 import ciolty.database.UnitOfWork;
-import ciolty.VideoDBImplementation.entities.UserData;
 import ciolty.server.Input;
+import fileio.ActorInputData;
 import fileio.MovieInputData;
 import fileio.SerialInputData;
 import fileio.UserInputData;
@@ -17,6 +19,7 @@ public final class VideoDBUnitOfWork implements UnitOfWork {
     private UserRepository userRepository;
     private MovieRepository movieRepository;
     private SeriesRepository seriesRepository;
+    private ActorRepository actorRepository;
 
     private void populateUserRepository(final VideoDBInput videoDBInput) {
         ResourceManager<UserData> resourceManager = new ResourceManagerHashMap<UserData>();
@@ -42,6 +45,14 @@ public final class VideoDBUnitOfWork implements UnitOfWork {
         seriesRepository = new SeriesRepository(resourceManager);
     }
 
+    private void populateActorRepository(final VideoDBInput videoDBInput) {
+        ResourceManager<ActorData> resourceManager = new ResourceManagerLinkedHashMap<>();
+        for (ActorInputData actorInputData : videoDBInput.getActors()) {
+            resourceManager.add(actorInputData.getName(), new ActorData(actorInputData));
+        }
+        actorRepository = new ActorRepository(resourceManager);
+    }
+
     @Override
     public void populate(final Input input) {
         VideoDBInput videoDBInput = (VideoDBInput) input;
@@ -49,6 +60,7 @@ public final class VideoDBUnitOfWork implements UnitOfWork {
         populateUserRepository(videoDBInput);
         populateMovieRepository(videoDBInput);
         populateSeriesRepository(videoDBInput);
+        populateActorRepository(videoDBInput);
     }
 
     public UserRepository getUserRepository() {

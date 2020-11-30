@@ -11,18 +11,10 @@ public abstract class UserAction extends VideoDBAction {
      * Initialize userData
      */
     @Override
-    public void initLocalData() {
+    public String start() {
         userData = getUserData();
-    }
-
-    /**
-     * @return null for success
-     */
-    @Override
-    public String checkData() {
-        String message = checkUserValidity();
-        if (message != null) {
-            return message;
+        if (!isUserValid()) {
+            return "Invalid user " + actionData.getUsername();
         }
         return null;
     }
@@ -36,12 +28,8 @@ public abstract class UserAction extends VideoDBAction {
         return null;
     }
 
-    protected final String checkUserValidity() {
-        if (userData == null) {
-            return "Error: user " + actionData.getUsername() + " not found";
-        } else {
-            return null;
-        }
+    protected final boolean isUserValid() {
+        return userData != null;
     }
 
     protected final UserData getUserData() {
@@ -50,30 +38,11 @@ public abstract class UserAction extends VideoDBAction {
         return userData;
     }
 
-    protected final String checkVideoInUser() {
-        String message = checkVideoInUserHistory();
-        if (message != null) {
-            return message;
-        }
-
-        message = checkVideoInUserFavorites();
-        if (message != null) {
-            return message;
-        }
-        return null;
+    protected final boolean isVideoInUserHistory() {
+        return userData.getHistory().containsKey(actionData.getTitle());
     }
 
-    protected final String checkVideoInUserHistory() {
-        if (!userData.getHistory().containsKey(actionData.getTitle())) {
-            return "error -> " + actionData.getTitle() + " is not seen";
-        }
-        return null;
-    }
-
-    protected final String checkVideoInUserFavorites() {
-        if (userData.getFavoriteMovies().contains(actionData.getTitle())) {
-            return "error -> " + actionData.getTitle() + " is already in favourite list";
-        }
-        return null;
+    protected final boolean isVideoInUserFavorites() {
+        return userData.getFavoriteMovies().contains(actionData.getTitle());
     }
 }

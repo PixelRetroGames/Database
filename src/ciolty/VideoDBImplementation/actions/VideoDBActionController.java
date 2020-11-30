@@ -1,8 +1,8 @@
 package ciolty.VideoDBImplementation.actions;
 
 import ciolty.action.ActionData;
-import ciolty.action.Action;
 import ciolty.action.ActionControllerAbstract;
+import ciolty.action.Actionable;
 import ciolty.database.UnitOfWork;
 
 import java.util.Map;
@@ -15,7 +15,7 @@ public class VideoDBActionController extends ActionControllerAbstract {
     private static final Level LOGGER_LEVEL = Level.OFF;
 
     public VideoDBActionController(final UnitOfWork unitOfWork,
-                                   final Map<String, Supplier<Action>> actionMap) {
+                                   final Map<String, Supplier<Actionable>> actionMap) {
         super(unitOfWork, actionMap, new ActionTypeFormat());
 
         LOGGER.setLevel(LOGGER_LEVEL);
@@ -27,7 +27,7 @@ public class VideoDBActionController extends ActionControllerAbstract {
      */
     public final String execute(final ActionData data) {
         String typeName = actionTypeFormat.getFormat(data);
-        Action action = actionFactory.get(typeName);
+        Actionable action = actionFactory.get(typeName);
 
         if (action == null) {
             LOGGER.log(Level.WARNING, "Action type: " + typeName + " not found!");

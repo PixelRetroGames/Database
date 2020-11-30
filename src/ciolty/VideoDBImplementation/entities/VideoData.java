@@ -4,13 +4,19 @@ import fileio.ShowInput;
 
 import java.util.ArrayList;
 
-public class ShowData {
+public abstract class VideoData {
     private final String title;
     private final int year;
     private final ArrayList<String> cast;
     private final ArrayList<String> genres;
 
-    public ShowData(final ShowInput inputData) {
+    /**
+     * Should be implemented by Movie and Series
+     * @return rating of video
+     */
+    public abstract double getRating();
+
+    public VideoData(final ShowInput inputData) {
         this.title = inputData.getTitle();
         this.year = inputData.getYear();
         this.cast = inputData.getCast();
