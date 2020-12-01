@@ -1,17 +1,15 @@
 package ciolty.VideoDBImplementation.actions;
 
 import ciolty.VideoDBImplementation.entities.ActorData;
-import ciolty.VideoDBImplementation.entities.VideoDBOutput;
-import ciolty.VideoDBImplementation.entities.VideoData;
 import ciolty.database.Filter;
 import ciolty.factory.Factory;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-public class QueryActors extends VideoDBAction implements ActorAction{
+public final class QueryActors extends VideoDBAction implements ActorAction {
     protected List<String> words;
     protected List<String> awards;
 
@@ -24,7 +22,8 @@ public class QueryActors extends VideoDBAction implements ActorAction{
     }
 
     protected List<ActorData> getActorsWithFilter() {
-        List<ActorData> actors = new ArrayList<>(getAllActorsWithFilter(new ActorFilter(words, awards)));
+        List<ActorData> actors = new ArrayList<>(getAllActorsWithFilter(
+                new ActorFilter(words, awards)));
         return actors;
     }
 
@@ -34,7 +33,7 @@ public class QueryActors extends VideoDBAction implements ActorAction{
         return "Query result: " + videosTitles;
     }
 
-    public List<String> getActorsNamesWithFilterSortedAndTrimmed() {
+    private List<String> getActorsNamesWithFilterSortedAndTrimmed() {
         List<ActorData> actorsWithFilter = getActorsWithFilter();
         Factory<QueryActorStrategy> strategyFactory = new Factory<QueryActorStrategy>(Map.of(
             "average",              QueryActorsAverageStrategy::new,
@@ -58,11 +57,11 @@ public class QueryActors extends VideoDBAction implements ActorAction{
         return actorNames;
     }
 
-    public class ActorFilter implements Filter {
+    public static final class ActorFilter implements Filter {
         protected final List<String> words;
         protected final List<String> awards;
 
-        public ActorFilter(List<String> words, List<String> awards) {
+        public ActorFilter(final List<String> words, final List<String> awards) {
             this.words = words;
             this.awards = awards;
         }
@@ -75,6 +74,9 @@ public class QueryActors extends VideoDBAction implements ActorAction{
                 for (String award : awards) {
                     if (actor.getAwards().containsKey(award)) {
                         numberOfAwards++;
+                    } else {
+                        numberOfAwards = 0;
+                        break;
                     }
                 }
                 if (numberOfAwards == 0) {
@@ -83,13 +85,21 @@ public class QueryActors extends VideoDBAction implements ActorAction{
             }
 
             if (words != null) {
+                List<String> descriptionWords = getWords(actor.getCareerDescription()
+                        .toLowerCase());
+                System.err.println(actor.getName() + " " +  descriptionWords);
                 for (String word : words) {
-                    if (!actor.getCareerDescription().contains(word)) {
+                    if (!descriptionWords.contains(word)) {
                         return false;
                     }
                 }
             }
             return true;
+        }
+
+        private List<String> getWords(final String sentence) {
+            final String[] wordsArray = sentence.split("\\W+");
+            return new ArrayList<String>(Arrays.asList(wordsArray));
         }
     }
 }

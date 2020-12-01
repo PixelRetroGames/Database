@@ -8,10 +8,10 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class QueryActorsAverageStrategy implements QueryActorStrategy {
+public final class QueryActorsAverageStrategy implements QueryActorStrategy {
     @Override
-    public void sortVideos(List<ActorData> actors, String sortType,
-                           VideoDBUnitOfWork unitOfWork, List<String> awards) {
+    public void sortVideos(final List<ActorData> actors, final String sortType,
+                           final VideoDBUnitOfWork unitOfWork, final List<String> awards) {
         actors.forEach(actor -> System.err.println(actor.getName()));
         Map<String, Double> actorsAverage = new LinkedHashMap<>();
 
@@ -44,7 +44,7 @@ public class QueryActorsAverageStrategy implements QueryActorStrategy {
                 + " " + actorsAverage.get(actor.getName()).toString()));
     }
 
-    private VideoData getVideo(String title, VideoDBUnitOfWork unitOfWork) {
+    private VideoData getVideo(final String title, final VideoDBUnitOfWork unitOfWork) {
         VideoData video = unitOfWork.getMovieRepository().get(title);
         if (video == null) {
             video = unitOfWork.getSeriesRepository().get(title);
@@ -52,16 +52,17 @@ public class QueryActorsAverageStrategy implements QueryActorStrategy {
         return video;
     }
 
-    private static class AverageComparator implements java.util.Comparator<ActorData> {
+    private static final class AverageComparator implements java.util.Comparator<ActorData> {
         private final Map<String, Double> actorsAverage;
 
-        private AverageComparator(Map<String, Double> actorsAverage) {
+        private AverageComparator(final Map<String, Double> actorsAverage) {
             this.actorsAverage = actorsAverage;
         }
 
         @Override
-        public int compare(ActorData o1, ActorData o2) {
-            int cmp = Double.compare(actorsAverage.get(o1.getName()), actorsAverage.get(o2.getName()));
+        public int compare(final ActorData o1, final ActorData o2) {
+            int cmp = Double.compare(actorsAverage.get(o1.getName()),
+                    actorsAverage.get(o2.getName()));
             if (cmp == 0) {
                 return o1.getName().compareTo(o2.getName());
             }

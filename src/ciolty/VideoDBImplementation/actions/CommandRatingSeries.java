@@ -3,8 +3,6 @@ package ciolty.VideoDBImplementation.actions;
 import ciolty.VideoDBImplementation.entities.SeasonData;
 import ciolty.VideoDBImplementation.entities.SeriesData;
 
-import java.util.logging.Level;
-
 public final class CommandRatingSeries extends UserAction {
     private SeriesData seriesData;
     private SeasonData seasonData;
@@ -31,19 +29,16 @@ public final class CommandRatingSeries extends UserAction {
             return "Error: season " + seasonData.getCurrentSeason() + " not found";
         }
 
+        if (userData.getRatedVideos().contains(seriesData.getTitle()
+                + seasonData.getCurrentSeason())) {
+            return "error -> " + seriesData.getTitle() + " has been already rated";
+        }
+
         return null;
     }
 
     @Override
     public String execute() {
-        if (userData.getRatedVideos().contains(seriesData.getTitle()
-                + seasonData.getCurrentSeason())) {
-            return "error -> " + seriesData.getTitle()
-                    + seasonData.getCurrentSeason() + " has been already rated";
-        }
-
-        LOGGER.log(Level.INFO, "Rated series " + actionData.getTitle()
-                + " season " + actionData.getSeasonNumber() + " rating = " + actionData.getGrade());
         double givenRating = actionData.getGrade();
         double rating = seasonData.getRating();
         int numberOfRatings = seasonData.getNumberOfRatings();

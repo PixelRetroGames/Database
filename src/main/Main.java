@@ -47,14 +47,6 @@ public final class Main {
         checker.deleteFiles(outputDirectory.listFiles());
 
         for (File file : Objects.requireNonNull(directory.listFiles())) {
-            /*
-            // TO REMOVE ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-            if (!file.toString().equals("test_db\\test_files\\single_query_average_actors.json")) {
-                continue;
-            }
-            System.err.println(file.toString());
-            // TO REMOVE ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-
             String filepath = Constants.OUT_PATH + file.getName();
             File out = new File(filepath);
             boolean isCreated = out.createNewFile();

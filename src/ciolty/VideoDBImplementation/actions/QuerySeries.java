@@ -5,10 +5,11 @@ import ciolty.VideoDBImplementation.entities.VideoData;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QuerySeries extends QueryVideo implements SeriesAction{
+public final class QuerySeries extends QueryVideo implements SeriesAction {
     @Override
     protected List<VideoData> getVideosWithFilter() {
-        List<VideoData> videos = new ArrayList<>(getAllSeriesWithFilter(new VideoFilter(year, genre)));
+        List<VideoData> videos = new ArrayList<>(getAllSeriesWithFilter(
+                new VideoFilter(year, genre)));
         return videos;
     }
 

@@ -2,8 +2,6 @@ package ciolty.VideoDBImplementation.actions;
 
 import ciolty.VideoDBImplementation.entities.MovieData;
 
-import java.util.logging.Level;
-
 public final class CommandRatingMovie extends UserAction {
     private MovieData movieData;
 
@@ -18,16 +16,16 @@ public final class CommandRatingMovie extends UserAction {
         if (movieData == null) {
             return "Error: movie " + movieData.getTitle() + " not found";
         }
+
+        if (userData.getRatedVideos().contains(movieData.getTitle())) {
+            return "error -> " + movieData.getTitle() + " has been already rated";
+        }
+
         return null;
     }
 
     @Override
     public String execute() {
-        if (userData.getRatedVideos().contains(movieData.getTitle())) {
-            return "error -> " + movieData.getTitle() + " has been already rated";
-        }
-
-        LOGGER.log(Level.INFO, "Rated movie " + actionData.getTitle() + " rating = " + actionData.getGrade());
         double givenRating = actionData.getGrade();
         double rating = movieData.getRating();
         int numberOfRatings = movieData.getNumberOfRatings();

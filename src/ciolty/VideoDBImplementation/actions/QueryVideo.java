@@ -4,19 +4,26 @@ import ciolty.VideoDBImplementation.entities.VideoData;
 import ciolty.database.Filter;
 import ciolty.factory.Factory;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public abstract class QueryVideo extends VideoDBAction {
     protected int year;
     protected String genre;
+
     @Override
-    public String start() {
-        year = actionData.getFilters().get(0).get(0) == null ? 0 : Integer.parseInt(actionData.getFilters().get(0).get(0));
+    public final String start() {
+        year = actionData.getFilters().get(0).get(0) == null
+                ? 0 : Integer.parseInt(actionData.getFilters().get(0).get(0));
         genre = actionData.getFilters().get(1).get(0);
         return null;
     }
 
-    public List<String> getVideosTitlesWithFilterSortedAndTrimmed() {
+    /**
+     * @return List of video titles
+     */
+    public final List<String> getVideosTitlesWithFilterSortedAndTrimmed() {
         List<VideoData> videosWithFilter = getVideosWithFilter();
         Factory<QueryVideoStrategy> strategyFactory = new Factory<QueryVideoStrategy>(Map.of(
                 "longest", QueryVideoLongestStrategy::new,
@@ -34,18 +41,22 @@ public abstract class QueryVideo extends VideoDBAction {
                         videosWithFilter.size()));
 
         List<String> videosTitles = new ArrayList<>();
-        videosWithFilter.forEach(video->videosTitles.add(video.getTitle()));
+        videosWithFilter.forEach(video -> videosTitles.add(video.getTitle()));
 
         return videosTitles;
     }
 
+    /**
+     * Override it for movies and series
+     * @return filtered videos
+     */
     protected abstract List<VideoData> getVideosWithFilter();
 
-    public class VideoFilter implements Filter {
+    public static final class VideoFilter implements Filter {
         private final int year;
         private final String genre;
 
-        public VideoFilter(int year, String genre) {
+        public VideoFilter(final int year, final String genre) {
             this.year = year;
             this.genre = genre;
         }

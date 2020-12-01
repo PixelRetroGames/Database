@@ -23,10 +23,6 @@ public abstract class VideoData {
      */
     public abstract int getDuration();
 
-    public int getPriority() {
-        return priority;
-    }
-
     public VideoData(final ShowInput inputData) {
         this.title = inputData.getTitle();
         this.year = inputData.getYear();

@@ -10,6 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface VideoAction extends MovieAction, SeriesAction {
+    /**
+     * @param filter
+     * @return list of videos data
+     */
     default List<VideoData> getAllVideosWithFilter(Filter filter) {
         List<VideoData> videos = new ArrayList<>();
         videos.addAll(getAllMoviesWithFilter(filter));
@@ -17,6 +21,10 @@ public interface VideoAction extends MovieAction, SeriesAction {
         return videos;
     }
 
+    /**
+     * @param userData
+     * @return list of videos data
+     */
     default List<VideoData> getUnwatchedVideos(final UserData userData) {
         List<MovieData> unwatchedMovies = getUnwatchedMovies(userData);
         List<SeriesData> unwatchedSeries = getUnwatchedSeries(userData);
@@ -28,6 +36,11 @@ public interface VideoAction extends MovieAction, SeriesAction {
         return unwatchedVideos;
     }
 
+    /**
+     * @param userData
+     * @param genre
+     * @return list of videos names
+     */
     default List<String> getUnwatchedVideosOfGenre(final UserData userData,
                                                            final String genre) {
         List<MovieData> unwatchedMovies = getUnwatchedMoviesOfGenre(userData, genre);

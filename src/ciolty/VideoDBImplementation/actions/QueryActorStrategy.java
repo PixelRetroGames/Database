@@ -6,6 +6,13 @@ import ciolty.VideoDBImplementation.repositories.VideoDBUnitOfWork;
 import java.util.List;
 
 public interface QueryActorStrategy {
-    public void sortVideos(List<ActorData> actors, String sortType,
-                           VideoDBUnitOfWork unitOfWork, List<String> awards);
+    /**
+     * Override for different strategies
+     * @param actors
+     * @param sortType
+     * @param unitOfWork
+     * @param awards
+     */
+    void sortVideos(List<ActorData> actors, String sortType,
+                    VideoDBUnitOfWork unitOfWork, List<String> awards);
 }

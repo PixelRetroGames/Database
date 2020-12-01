@@ -8,8 +8,8 @@ import java.util.List;
 
 public final class QueryVideoRatingsStrategy implements QueryVideoStrategy {
     @Override
-    public void sortVideos(List<VideoData> videos, final String sortType,
-                                  UserRepository userRepository) {
+    public void sortVideos(final List<VideoData> videos, final String sortType,
+                           final UserRepository userRepository) {
         videos.removeIf(videoData -> Math.abs(videoData.getRating()) < 1E-7);
         if (sortType.equals("asc")) {
             videos.sort(new RatingComparator());
@@ -18,10 +18,14 @@ public final class QueryVideoRatingsStrategy implements QueryVideoStrategy {
         }
     }
 
-    private static class RatingComparator implements Comparator<VideoData> {
+    private static final class RatingComparator implements Comparator<VideoData> {
         @Override
-        public int compare(VideoData o1, VideoData o2) {
-            return Double.compare(o1.getRating(), o2.getRating());
+        public int compare(final VideoData o1, final VideoData o2) {
+            int cmp = Double.compare(o1.getRating(), o2.getRating());
+            if (cmp == 0) {
+                return o1.getTitle().compareTo(o2.getTitle());
+            }
+            return cmp;
         }
     }
 }

@@ -70,6 +70,22 @@ public final class Utils {
     }
 
     /**
+     * Transforms an enum into a string
+     * @param an ActorsAwards Enum
+     * @return String award for actors
+     */
+    public static String awardsToString(final ActorsAwards award) {
+        return switch (award) {
+            case BEST_SCREENPLAY -> "BEST_SCREENPLAY";
+            case BEST_SUPPORTING_ACTOR -> "BEST_SUPPORTING_ACTOR";
+            case BEST_DIRECTOR -> "BEST_DIRECTOR";
+            case BEST_PERFORMANCE -> "BEST_PERFORMANCE";
+            case PEOPLE_CHOICE_AWARD -> "PEOPLE_CHOICE_AWARD";
+            default -> null;
+        };
+    }
+
+    /**
      * Transforms an array of JSON's into an array of strings
      * @param array of JSONs
      * @return a list of strings

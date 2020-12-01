@@ -1,22 +1,31 @@
 package ciolty.VideoDBImplementation.entities;
 
-import actor.ActorsAwards;
 import fileio.ActorInputData;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.Map;
+
+import static utils.Utils.awardsToString;
 
 public final class ActorData {
     private final String name;
     private final String careerDescription;
     private final ArrayList<String> filmography;
-    private final Map<ActorsAwards, Integer> awards;
+    private final Map<String, Integer> awards;
+    private final int numberOfAwards;
 
     public ActorData(final ActorInputData inputData) {
         this.name = inputData.getName();
         this.careerDescription = inputData.getCareerDescription();
         this.filmography = inputData.getFilmography();
-        this.awards = inputData.getAwards();
+        this.awards = new LinkedHashMap<>();
+        inputData.getAwards().forEach((award, nr) -> awards.put(awardsToString(award), nr));
+        int awardsCount = 0;
+        for (Map.Entry<String, Integer> entry : awards.entrySet()) {
+            awardsCount += entry.getValue();
+        }
+        this.numberOfAwards = awardsCount;
     }
 
     public String getName() {
@@ -27,7 +36,7 @@ public final class ActorData {
         return filmography;
     }
 
-    public Map<ActorsAwards, Integer> getAwards() {
+    public Map<String, Integer> getAwards() {
         return awards;
     }
 
@@ -42,5 +51,9 @@ public final class ActorData {
                 + ", careerDescription='"
                 + careerDescription + '\''
                 + ", filmography=" + filmography + '}';
+    }
+
+    public int getNumberOfAwards() {
+        return numberOfAwards;
     }
 }

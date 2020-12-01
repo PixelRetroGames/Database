@@ -6,6 +6,12 @@ import ciolty.VideoDBImplementation.repositories.UserRepository;
 import java.util.List;
 
 public interface QueryVideoStrategy {
-    public void sortVideos(List<VideoData> videos, final String sortType,
-                           UserRepository userRepository);
+    /**
+     * Sort videos in place
+     * @param videos
+     * @param sortType
+     * @param userRepository
+     */
+    void sortVideos(List<VideoData> videos, String sortType,
+                    UserRepository userRepository);
 }
