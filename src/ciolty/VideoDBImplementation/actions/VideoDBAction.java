@@ -1,7 +1,7 @@
 package ciolty.VideoDBImplementation.actions;
 
 import ciolty.VideoDBImplementation.repositories.VideoDBUnitOfWork;
-import ciolty.action.ActionAbstract;
+import ciolty.engine.action.ActionAbstract;
 
 public abstract class VideoDBAction extends ActionAbstract implements VideoDBActionInterface {
     protected VideoDBAction() {

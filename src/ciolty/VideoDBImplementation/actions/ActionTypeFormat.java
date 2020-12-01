@@ -1,7 +1,7 @@
 package ciolty.VideoDBImplementation.actions;
 
-import ciolty.action.ActionData;
-import ciolty.factory.TypeFormat;
+import ciolty.engine.action.ActionData;
+import ciolty.engine.factory.TypeFormat;
 
 public class ActionTypeFormat implements TypeFormat {
     @Override

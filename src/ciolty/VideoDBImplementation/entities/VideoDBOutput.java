@@ -1,6 +1,6 @@
 package ciolty.VideoDBImplementation.entities;
 
-import ciolty.action.Output;
+import ciolty.engine.action.Output;
 
 public final class VideoDBOutput implements Output {
     private final int id;

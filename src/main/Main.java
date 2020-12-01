@@ -2,12 +2,12 @@ package main;
 
 import checker.Checkstyle;
 import checker.Checker;
-import ciolty.JSON.JsonConverter;
-import ciolty.JSON.Writer;
+import ciolty.engine.JSON.JsonConverter;
+import ciolty.engine.JSON.Writer;
 import ciolty.VideoDBImplementation.JSON.JsonOutputConverter;
 import ciolty.VideoDBImplementation.entities.VideoDBInput;
 import ciolty.VideoDBImplementation.server.VideoDBServer;
-import ciolty.server.Server;
+import ciolty.engine.server.Server;
 import common.Constants;
 import fileio.Input;
 import fileio.InputLoader;

@@ -1,6 +1,6 @@
 package ciolty.VideoDBImplementation.resourceManagers;
 
-import ciolty.database.ResourceManagerAbstract;
+import ciolty.engine.database.ResourceManagerAbstract;
 
 import java.util.LinkedHashMap;
 

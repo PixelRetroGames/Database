@@ -1,8 +1,8 @@
 package ciolty.VideoDBImplementation.repositories;
 
 import ciolty.VideoDBImplementation.entities.SeriesData;
-import ciolty.database.RepositoryAbstract;
-import ciolty.database.ResourceManager;
+import ciolty.engine.database.RepositoryAbstract;
+import ciolty.engine.database.ResourceManager;
 
 public class SeriesRepository extends RepositoryAbstract<SeriesData> {
     public SeriesRepository(final ResourceManager<SeriesData> resourceManager) {

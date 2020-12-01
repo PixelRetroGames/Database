@@ -1,7 +1,7 @@
 package ciolty.VideoDBImplementation.repositories;
 
-import ciolty.database.RepositoryAbstract;
-import ciolty.database.ResourceManager;
+import ciolty.engine.database.RepositoryAbstract;
+import ciolty.engine.database.ResourceManager;
 import ciolty.VideoDBImplementation.entities.UserData;
 
 import java.util.LinkedHashMap;

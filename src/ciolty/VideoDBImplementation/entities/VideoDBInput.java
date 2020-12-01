@@ -9,7 +9,7 @@ import fileio.Input;
 
 import java.util.List;
 
-public final class VideoDBInput implements ciolty.server.Input {
+public final class VideoDBInput implements ciolty.engine.server.Input {
     private final List<ActorInputData> actorsData;
     private final List<UserInputData> usersData;
     private final List<ActionInputData> commandsData;

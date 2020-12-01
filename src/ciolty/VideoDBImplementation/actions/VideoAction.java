@@ -4,7 +4,7 @@ import ciolty.VideoDBImplementation.entities.MovieData;
 import ciolty.VideoDBImplementation.entities.SeriesData;
 import ciolty.VideoDBImplementation.entities.UserData;
 import ciolty.VideoDBImplementation.entities.VideoData;
-import ciolty.database.Filter;
+import ciolty.engine.database.Filter;
 
 import java.util.ArrayList;
 import java.util.List;

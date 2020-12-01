@@ -1,6 +1,6 @@
 package ciolty.VideoDBImplementation.JSON;
 
-import ciolty.JSON.JsonConverter;
+import ciolty.engine.JSON.JsonConverter;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 

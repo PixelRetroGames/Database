@@ -2,7 +2,7 @@ package ciolty.VideoDBImplementation.actions;
 
 import ciolty.VideoDBImplementation.entities.SeriesData;
 import ciolty.VideoDBImplementation.entities.UserData;
-import ciolty.database.Filter;
+import ciolty.engine.database.Filter;
 
 import java.util.List;
 
