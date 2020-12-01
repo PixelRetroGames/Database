@@ -1,5 +1,4 @@
 ### Object Oriented Programming Course
-
 Homework - VideosDB
 November 2020
 
@@ -11,7 +10,7 @@ My code is in the package ciolty that contains the engine and the VideoDBImpleme
 
 Main instantiates a Server, gives it the Input and receives back from the Server the output. It converts the output in a JSON format and writes it to the file.
 
-The Server takes the input, loads the Entities in memory with data from the Input (using UnitOfWork->Repository->DataManager). It parses all the actions one by one, and using the ActionController runs each action. The ActionController is responsible for creating the right type of action (using the Action Map and an Action Factory) and executing it.
+The Server takes the input, loads the Entities in memory with data from the Input (using UnitOfWork -> Repository -> DataManager). It parses all the actions one by one, and using the ActionController runs each action. The ActionController is responsible for creating the right type of action (using the Action Map and an Action Factory) and executing it.
 
 The Action has a reference to the Unit of Work and the ActionData. To create a new Action we have to implement the Action interface and to override the start and execute functions. These two functions act as the start and update from a game loop. Start is called before execute and is used to get data from the Unit of Work and to determine whether or not the execute function should be called (an error occurred). If an error occurred then the action will return the error message, else it will execute and return the execution completion message.
 
