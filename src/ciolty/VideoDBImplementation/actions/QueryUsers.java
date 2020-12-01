@@ -26,7 +26,6 @@ public final class QueryUsers extends VideoDBAction {
                     topUsers.size()));
         }
 
-
         List<String> topUsersSortedByRating = new ArrayList<>();
         topUsers.forEach(user -> topUsersSortedByRating.add(user.getUsername()));
         return "Query result: " + topUsersSortedByRating.toString();

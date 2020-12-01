@@ -21,6 +21,12 @@ public abstract class QueryVideo extends VideoDBAction {
     }
 
     /**
+     * Override it for movies and series
+     * @return filtered videos
+     */
+    protected abstract List<VideoData> getVideosWithFilter();
+
+    /**
      * @return List of video titles
      */
     public final List<String> getVideosTitlesWithFilterSortedAndTrimmed() {
@@ -46,13 +52,7 @@ public abstract class QueryVideo extends VideoDBAction {
         return videosTitles;
     }
 
-    /**
-     * Override it for movies and series
-     * @return filtered videos
-     */
-    protected abstract List<VideoData> getVideosWithFilter();
-
-    public static final class VideoFilter implements Filter {
+    protected static final class VideoFilter implements Filter {
         private final int year;
         private final String genre;
 

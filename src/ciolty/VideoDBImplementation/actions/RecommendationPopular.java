@@ -3,7 +3,7 @@ package ciolty.VideoDBImplementation.actions;
 import java.util.List;
 import java.util.Map;
 
-public final class RecommendationPopular extends GenresPopularity {
+public final class RecommendationPopular extends RecommendationPremium {
     public RecommendationPopular() {
         super();
         setFailMessage("PopularRecommendation cannot be applied!");
@@ -19,7 +19,8 @@ public final class RecommendationPopular extends GenresPopularity {
     }
 
     private String getPopularRecommendation() {
-        List<Map.Entry<String, Integer>> sortedGenres = getGenresSortedByPopularity();
+        List<Map.Entry<String, Integer>> sortedGenres =
+                new GenresPopularityStrategy(getUnitOfWork()).getGenresSortedByPopularity();
         for (Map.Entry<String, Integer> genreEntry : sortedGenres) {
             String genre = genreEntry.getKey();
             List<String> videos = getUnwatchedVideosOfGenre(userData, genre);

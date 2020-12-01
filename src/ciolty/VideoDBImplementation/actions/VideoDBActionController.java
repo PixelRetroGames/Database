@@ -7,18 +7,12 @@ import ciolty.database.UnitOfWork;
 
 import java.util.Map;
 import java.util.function.Supplier;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 public class VideoDBActionController extends ActionControllerAbstract {
-    protected static final Logger LOGGER = Logger.getLogger("VideoDBActionController");
-    private static final Level LOGGER_LEVEL = Level.OFF;
-
     public VideoDBActionController(final UnitOfWork unitOfWork,
                                    final Map<String, Supplier<Actionable>> actionMap) {
         super(unitOfWork, actionMap, new ActionTypeFormat());
-
-        LOGGER.setLevel(LOGGER_LEVEL);
     }
 
     /**
@@ -30,7 +24,6 @@ public class VideoDBActionController extends ActionControllerAbstract {
         Actionable action = actionFactory.get(typeName);
 
         if (action == null) {
-            LOGGER.log(Level.WARNING, "Action type: " + typeName + " not found!");
             return null;
         }
 

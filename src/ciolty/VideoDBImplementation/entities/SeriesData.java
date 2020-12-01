@@ -32,11 +32,29 @@ public final class SeriesData extends VideoData {
     @Override
     public double getRating() {
         double seriesRating = 0.0f;
-        for (SeasonData seasonDataIterator : seasons) {
-            seriesRating += seasonDataIterator.getRating();
+        for (SeasonData season : seasons) {
+            seriesRating += season.getRating();
         }
         seriesRating /= numberOfSeasons;
         return seriesRating;
+    }
+
+    @Override
+    public void setRating(final double rating) {
+    }
+
+    @Override
+    public int getNumberOfRatings() {
+        int numberOfRatings = 0;
+        for (SeasonData season : seasons) {
+            numberOfRatings++;
+        }
+        return numberOfRatings;
+    }
+
+    @Override
+    public void setNumberOfRatings(final int numberOfRatings) {
+
     }
 
     @Override

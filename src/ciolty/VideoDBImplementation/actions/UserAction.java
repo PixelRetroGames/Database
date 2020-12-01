@@ -2,8 +2,6 @@ package ciolty.VideoDBImplementation.actions;
 
 import ciolty.VideoDBImplementation.entities.UserData;
 
-import java.util.List;
-
 public abstract class UserAction extends VideoDBAction {
     protected UserData userData;
 
@@ -15,15 +13,6 @@ public abstract class UserAction extends VideoDBAction {
         userData = getUserData();
         if (!isUserValid()) {
             return "Invalid user " + actionData.getUsername();
-        }
-        return null;
-    }
-
-    protected final String getFirstNonNull(final List<String> list) {
-        for (String str: list) {
-            if (str != null) {
-                return str;
-            }
         }
         return null;
     }

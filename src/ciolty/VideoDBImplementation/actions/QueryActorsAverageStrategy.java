@@ -12,15 +12,22 @@ public final class QueryActorsAverageStrategy implements QueryActorStrategy {
     @Override
     public void sortVideos(final List<ActorData> actors, final String sortType,
                            final VideoDBUnitOfWork unitOfWork, final List<String> awards) {
-        actors.forEach(actor -> System.err.println(actor.getName()));
-        Map<String, Double> actorsAverage = new LinkedHashMap<>();
+        Map<String, Double> actorsAverage = getActorsAverage(actors, unitOfWork);
+        actors.removeIf(actor -> !actorsAverage.containsKey(actor.getName()));
+        if (sortType.equals("asc")) {
+            actors.sort(new AverageComparator(actorsAverage));
+        } else {
+            actors.sort(new AverageComparator(actorsAverage).reversed());
+        }
+    }
 
+    private Map<String, Double> getActorsAverage(final List<ActorData> actors,
+                                                 final VideoDBUnitOfWork unitOfWork) {
+        Map<String, Double> actorsAverage = new LinkedHashMap<>();
         for (ActorData actor : actors) {
             double sum = 0;
             int numberOfRatedVideos = 0;
-            System.err.println(actor.getFilmography());
             for (String videoName : actor.getFilmography()) {
-                System.err.println(videoName);
                 VideoData video = getVideo(videoName, unitOfWork);
                 if (video != null && video.getRating() > 0) {
                     sum += video.getRating();
@@ -31,17 +38,7 @@ public final class QueryActorsAverageStrategy implements QueryActorStrategy {
                 actorsAverage.put(actor.getName(), sum / numberOfRatedVideos);
             }
         }
-
-        actors.removeIf(actor -> !actorsAverage.containsKey(actor.getName()));
-
-        if (sortType.equals("asc")) {
-            actors.sort(new AverageComparator(actorsAverage));
-        } else {
-            actors.sort(new AverageComparator(actorsAverage).reversed());
-        }
-
-        actors.forEach(actor -> System.err.println(actor.getName()
-                + " " + actorsAverage.get(actor.getName()).toString()));
+        return actorsAverage;
     }
 
     private VideoData getVideo(final String title, final VideoDBUnitOfWork unitOfWork) {

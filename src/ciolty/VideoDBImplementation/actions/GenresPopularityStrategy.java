@@ -2,6 +2,7 @@ package ciolty.VideoDBImplementation.actions;
 
 import ciolty.VideoDBImplementation.entities.MovieData;
 import ciolty.VideoDBImplementation.entities.SeriesData;
+import ciolty.VideoDBImplementation.repositories.VideoDBUnitOfWork;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,11 +11,17 @@ import java.util.Map;
 import java.util.LinkedHashMap;
 
 
-public abstract class GenresPopularity extends RecommendationPremium {
+public final class GenresPopularityStrategy {
+    private final VideoDBUnitOfWork unitOfWork;
+
+    GenresPopularityStrategy(final VideoDBUnitOfWork unitOfWork) {
+        this.unitOfWork = unitOfWork;
+    }
+
     /**
-     * @return all genres in order of popularity
+     * @return list of map entries of genres and popularity
      */
-    public final List<Map.Entry<String, Integer>> getGenresSortedByPopularity() {
+    public List<Map.Entry<String, Integer>> getGenresSortedByPopularity() {
         Map<String, Integer> genresPopularity = getMapGenresPopularity();
         ArrayList<Map.Entry<String, Integer>> sortedGenres
                 = new ArrayList<>(genresPopularity.entrySet());
@@ -23,11 +30,8 @@ public abstract class GenresPopularity extends RecommendationPremium {
         return sortedGenres;
     }
 
-    /**
-     * @return map of genres and popularity
-     */
-    public final  Map<String, Integer> getMapGenresPopularity() {
-        Map<String, Integer> allHistory = getUnitOfWork().getUserRepository().getAllHistory();
+    private Map<String, Integer> getMapGenresPopularity() {
+        Map<String, Integer> allHistory = unitOfWork.getUserRepository().getAllHistory();
         Map<String, Integer> genresPopularity = new LinkedHashMap<>();
 
         for (Map.Entry<String, Integer> entry : allHistory.entrySet()) {
@@ -44,13 +48,9 @@ public abstract class GenresPopularity extends RecommendationPremium {
         return genresPopularity;
     }
 
-    /**
-     * @param title
-     * @return genres of the video with title
-     */
-    public final  List<String> getVideoGenres(final String title) {
-        MovieData movie = getUnitOfWork().getMovieRepository().get(title);
-        SeriesData series = getUnitOfWork().getSeriesRepository().get(title);
+    private List<String> getVideoGenres(final String title) {
+        MovieData movie = unitOfWork.getMovieRepository().get(title);
+        SeriesData series = unitOfWork.getSeriesRepository().get(title);
 
         List<String> genres = null;
         if (movie != null) {

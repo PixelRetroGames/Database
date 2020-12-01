@@ -39,23 +39,8 @@ public final class CommandRatingSeries extends UserAction {
 
     @Override
     public String execute() {
-        double givenRating = actionData.getGrade();
-        double rating = seasonData.getRating();
-        int numberOfRatings = seasonData.getNumberOfRatings();
-
-        if (numberOfRatings == 0) {
-            rating = givenRating;
-        } else {
-            rating = (rating * numberOfRatings + givenRating) / (numberOfRatings + 1);
-        }
-
-        numberOfRatings++;
-
-        seasonData.setNumberOfRatings(numberOfRatings);
-        seasonData.setRating(rating);
-
+        new CommandRatingVideoStrategy(seasonData).rateVideo(actionData.getGrade());
         userData.getRatedVideos().add(seriesData.getTitle() + seasonData.getCurrentSeason());
-
         return "success -> " + seriesData.getTitle() + " was rated with " + actionData.getGrade()
                 + " by " + actionData.getUsername();
     }

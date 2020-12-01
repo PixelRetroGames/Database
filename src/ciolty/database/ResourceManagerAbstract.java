@@ -17,7 +17,6 @@ public class ResourceManagerAbstract<T> implements ResourceManager<T> {
         if (map.containsKey(name)) {
             return map.get(name);
         } else {
-            System.err.println("Key not found in map!");
             return null;
         }
     }

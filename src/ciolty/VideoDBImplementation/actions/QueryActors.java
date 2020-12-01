@@ -15,22 +15,21 @@ public final class QueryActors extends VideoDBAction implements ActorAction {
 
     @Override
     public String start() {
-        System.err.println("Actor");
         words = actionData.getFilters().get(2);
         awards = actionData.getFilters().get(3);
         return null;
-    }
-
-    protected List<ActorData> getActorsWithFilter() {
-        List<ActorData> actors = new ArrayList<>(getAllActorsWithFilter(
-                new ActorFilter(words, awards)));
-        return actors;
     }
 
     @Override
     public String execute() {
         List<String> videosTitles = getActorsNamesWithFilterSortedAndTrimmed();
         return "Query result: " + videosTitles;
+    }
+
+    private List<ActorData> getActorsWithFilter() {
+        List<ActorData> actors = new ArrayList<>(getAllActorsWithFilter(
+                new ActorFilter(words, awards)));
+        return actors;
     }
 
     private List<String> getActorsNamesWithFilterSortedAndTrimmed() {
@@ -87,7 +86,6 @@ public final class QueryActors extends VideoDBAction implements ActorAction {
             if (words != null) {
                 List<String> descriptionWords = getWords(actor.getCareerDescription()
                         .toLowerCase());
-                System.err.println(actor.getName() + " " +  descriptionWords);
                 for (String word : words) {
                     if (!descriptionWords.contains(word)) {
                         return false;

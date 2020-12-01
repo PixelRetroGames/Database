@@ -2,7 +2,7 @@ package ciolty.VideoDBImplementation.entities;
 
 import entertainment.Season;
 
-public final class SeasonData {
+public final class SeasonData extends VideoData {
     private final int currentSeason;
     private int duration;
     private double rating;
@@ -14,10 +14,12 @@ public final class SeasonData {
         this.rating = 0;
     }
 
+    @Override
     public int getNumberOfRatings() {
         return numberOfRatings;
     }
 
+    @Override
     public void setNumberOfRatings(final int numberOfRatings) {
         this.numberOfRatings = numberOfRatings;
     }
@@ -26,6 +28,7 @@ public final class SeasonData {
         return currentSeason;
     }
 
+    @Override
     public int getDuration() {
         return duration;
     }
@@ -34,10 +37,12 @@ public final class SeasonData {
         this.duration = duration;
     }
 
+    @Override
     public double getRating() {
         return rating;
     }
 
+    @Override
     public void setRating(final double rating) {
         this.rating = rating;
     }

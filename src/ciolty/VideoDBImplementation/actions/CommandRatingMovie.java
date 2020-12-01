@@ -26,24 +26,10 @@ public final class CommandRatingMovie extends UserAction {
 
     @Override
     public String execute() {
-        double givenRating = actionData.getGrade();
-        double rating = movieData.getRating();
-        int numberOfRatings = movieData.getNumberOfRatings();
-
-        if (numberOfRatings == 0) {
-            rating = givenRating;
-        } else {
-            rating = (rating * numberOfRatings + givenRating) / (numberOfRatings + 1);
-        }
-
-        numberOfRatings++;
-
-        movieData.setNumberOfRatings(numberOfRatings);
-        movieData.setRating(rating);
-
+        new CommandRatingVideoStrategy(movieData).rateVideo(actionData.getGrade());
         userData.getRatedVideos().add(movieData.getTitle());
-
-        return "success -> " + movieData.getTitle() + " was rated with " + givenRating + " by "
-                + actionData.getUsername();
+        return "success -> " + movieData.getTitle()
+                + " was rated with " + actionData.getGrade()
+                + " by " + actionData.getUsername();
     }
 }

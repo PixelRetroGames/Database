@@ -13,18 +13,11 @@ public final class QueryVideoMostViewedStrategy implements QueryVideoStrategy {
         Map<String, Integer> globalHistory = userRepository.getAllHistory();
         videos.removeIf(videoData -> !globalHistory.containsKey(videoData.getTitle()));
 
-        System.err.println("QueryVideoMostViewed");
-        videos.forEach(video -> System.err.println(video.getTitle() + " "
-                + globalHistory.get(video.getTitle())));
-
         if (sortType.equals("asc")) {
             videos.sort(new MostViewedComparator(globalHistory));
         } else {
             videos.sort(new MostViewedComparator(globalHistory).reversed());
         }
-
-        videos.forEach(video -> System.err.println(video.getTitle() + " "
-                + globalHistory.get(video.getTitle())));
     }
 
     private static final class MostViewedComparator implements java.util.Comparator<VideoData> {

@@ -26,14 +26,17 @@ public final class MovieData extends VideoData {
         return rating;
     }
 
+    @Override
     public void setRating(final double rating) {
         this.rating = rating;
     }
 
+    @Override
     public int getNumberOfRatings() {
         return numberOfRatings;
     }
 
+    @Override
     public void setNumberOfRatings(final int numberOfRatings) {
         this.numberOfRatings = numberOfRatings;
     }

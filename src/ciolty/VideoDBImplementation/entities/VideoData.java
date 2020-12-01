@@ -18,10 +18,32 @@ public abstract class VideoData {
     public abstract double getRating();
 
     /**
+     * @param rating
+     */
+    public abstract void setRating(double rating);
+
+    /**
+     * @return number of ratings
+     */
+    public abstract int getNumberOfRatings();
+
+    /**
+     * @param numberOfRatings
+     */
+    public abstract void setNumberOfRatings(int numberOfRatings);
+
+    /**
      * Should be implemented by Movie and Series
      * @return duration of video
      */
     public abstract int getDuration();
+
+    public VideoData() {
+        this.title = null;
+        this.year = 0;
+        this.cast = null;
+        this.genres = null;
+    }
 
     public VideoData(final ShowInput inputData) {
         this.title = inputData.getTitle();

@@ -1,7 +1,7 @@
 Starting audit...
 [ERROR] E:\JAVA\POO-Tema1\.\src\ciolty\action\ActionAbstract.java:10:37: Parameter unitOfWork should be final. [FinalParameters]
 [ERROR] E:\JAVA\POO-Tema1\.\src\ciolty\action\ActionAbstract.java:15:37: Parameter actionData should be final. [FinalParameters]
-[ERROR] E:\JAVA\POO-Tema1\.\src\ciolty\VideoDBImplementation\actions\QueryActors.java:20:46: '3' is a magic number. [MagicNumber]
+[ERROR] E:\JAVA\POO-Tema1\.\src\ciolty\VideoDBImplementation\actions\QueryActors.java:19:46: '3' is a magic number. [MagicNumber]
 [ERROR] E:\JAVA\POO-Tema1\.\src\ciolty\VideoDBImplementation\actions\QueryVideoRatingsStrategy.java:13:72: '1E-7' is a magic number. [MagicNumber]
 [ERROR] E:\JAVA\POO-Tema1\.\src\ciolty\VideoDBImplementation\actions\Recommendation.java:6:38: Parameter failMessage should be final. [FinalParameters]
 Audit done.
